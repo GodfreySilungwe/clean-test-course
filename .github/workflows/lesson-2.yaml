@@ -38,6 +38,6 @@ jobs:
 
       - name: Run unit tests
         run: |
-          coverage run -m pytest --source=./hangry_api
+          coverage run --source=./hangry_api -m pytest
           coverage report
         working-directory: backend
