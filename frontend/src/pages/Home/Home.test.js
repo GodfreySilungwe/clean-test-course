@@ -4,6 +4,9 @@ import axios from 'axios';
 import Home from '.';
 
 describe('Test Home', () => {
+  afterEach(()=>{
+    jest.restoreAllMocks();
+  });
   test('Test Render', async () => {
     //Arrange: Setup the mock API
     //Listen for any GET requests using the axios module
@@ -47,4 +50,19 @@ describe('Test Home', () => {
     //The word Appeateasers should be in there as defined in the mock response above.
     expect(await screen.findByText('Appeteasers')).toBeInTheDocument();
   });
+  
+  test('Test integration', async () => {
+    //Arrange: Mock axios to point to local backend instead of production API
+
+    
+    //Act: Call the Home page
+    render(<Home />);
+
+    //Assert: Wait for actual API data to load from backend
+    //Categories should render with real data from the backend
+    await waitFor(() => {
+      expect(screen.getAllByTestId(/category-item/i).length).toBeGreaterThan(0);
+    }, { timeout: 15000 });
+  }, 20000);
 });
+ 
