@@ -16,13 +16,13 @@ jobs:
 #      - name: Run functional tests
 #        run: npm test -- --coverage --watchAll=false
   security_test:
-  needs: [deploy]
+    needs: [deploy]
     runs-on: ubuntu-latest
-  steps:
-    - name: ZAP Baseline Scan
-      uses: zaproxy/action-baseline@v0.15.0
-      with:
-       target: 'https://hangryhippo.quantic.host'
+    steps:
+        - name: ZAP Baseline Scan
+          uses: zaproxy/action-baseline@v0.15.0
+          with:
+            target: 'https://hangryhippo.quantic.host'
 
   deploy:
 #    needs: [function_test] (normally you'd not deploy until functional tests were complete)
